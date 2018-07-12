@@ -6,7 +6,7 @@ class Inbox extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Home page</Text>
+                <Text style={styles.fontColor}>Home page</Text>
             </View>
         );
     }
@@ -17,8 +17,11 @@ export default Inbox;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#333',
         alignItems: 'center',
         justifyContent: 'center',
     },
+    fontColor:{
+        color:'#fff'
+    }
 });
