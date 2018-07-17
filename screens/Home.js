@@ -6,7 +6,7 @@ class Inbox extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.fontColor}>Home page</Text>
+                <Text style={styles.fontColor}>Hello {this.props.navigation.state.params.UserName}</Text>
             </View>
         );
     }

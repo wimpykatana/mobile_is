@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View,SafeAreaView,TextInput, Button, Alert } from 'react-native';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator,createStackNavigator } from 'react-navigation';
 
 import Home from './screens/Home';
 import Profile from './screens/Profile';
 import Chart from './screens/Chart';
 
 
-export default class App extends React.Component {
+class LoginActivity extends React.Component {
 
     constructor(props) {
         super(props)
@@ -63,6 +63,7 @@ export default class App extends React.Component {
         const { userName }  = this.state ;
         const { userPassword }  = this.state ;
 
+        // fetch('http://investorsukses.com/reactphp/login.php',{
         fetch('http://localhost:8888/reactphp/login.php',{
            method: 'post',
             headers: {
@@ -78,9 +79,9 @@ export default class App extends React.Component {
             .then((res)=> {
                 if(res === 'Data Matched')
                 {
-                    Alert.alert(res);
+                    // Alert.alert(res);
                     //Then open Profile activity and send user email to profile activity.
-                    //this.props.navigation.navigate('Second', { Email: UserEmail });
+                    this.props.navigation.navigate('Home', { UserName: userName });
 
                 }
                 else{
@@ -93,12 +94,27 @@ export default class App extends React.Component {
     }
 }
 
+export default MainProject = createStackNavigator(
+    {
+        First: {
+                screen: LoginActivity,
+        },
+        Home:{
+            screen: Home
+        }
+
+    },
+    {
+        headerMode: 'none',
+    });
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#333',
     alignItems: 'center',
+      paddingTop:10
   },
   fontColor:{
     color:'#fff'
