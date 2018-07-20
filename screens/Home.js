@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image,SafeAreaView } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation';
+import { AdMobBanner } from 'expo';
+import Chart from './Chart';
+import Profile from './Profile';
 
-
-class Inbox extends Component {
+class Home extends Component {
 
     constructor(props) {
         super(props)
@@ -13,21 +16,73 @@ class Inbox extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Image
-                    source={{uri: 'http://investorsukses.com/content/uploads/'+this.state.data.userpicture}}
-                    style={{width: 250, height: 250}}/>
+            <SafeAreaView style={styles.container}>
                 <Text>{this.state.data.username}</Text>
                 <Text>{this.state.data.usergender}</Text>
                 <Text>{this.state.data.userid}</Text>
                 <Text>{this.state.data.usergroup}</Text>
                 <Text>{this.state.data.subscribe}</Text>
-            </View>
+
+                <AdMobBanner
+                    bannerSize="smartBannerPortrait"
+                    adUnitID="ca-app-pub-4762076392786064/7640436040" // Test ID, Replace with your-admob-unit-id
+                    testDeviceID="EMULATOR"
+                    onDidFailToReceiveAdWithError={this.bannerError}
+                    style={styles.adsHolder}/>
+            </SafeAreaView>
         );
     }
 }
 
-export default Inbox;
+export default createBottomTabNavigator({
+    Home:{
+        screen: Home,
+        navigationOptions:{
+            tabBarLabel: 'Home',
+            tabBarIcon:({tintColor}) => (
+                <Image source={require('../assets/menu/tea-cup.png')}
+                       style={{ height: 25, width: 25, tintColor: tintColor }}/>
+            )
+        }
+
+    },
+    Chart:{
+        screen: Chart,
+        navigationOptions:{
+            tabBarLabel: 'Chart',
+            tabBarIcon:({tintColor}) => (
+                <Image source={require('../assets/menu/international-search-for-money.png')}
+                       style={{ height: 25, width: 25, tintColor: tintColor }}/>
+            )
+        }
+    },
+    Profile:{
+        screen: Profile,
+        navigationOptions:{
+            tabBarLabel: 'Profile',
+            tabBarIcon:({tintColor}) => (
+                <Image source={require('../assets/menu/businessman-in-ascending-business-bars-graphic.png')}
+                       style={{ height: 25, width: 25, tintColor: tintColor }}/>
+            )
+        }
+    },
+
+},{
+    tabBarOptions:{
+        activeTintColor: '#f3ce21',
+        inactiveTintColor: 'gray',
+        style:{
+            backgroundColor: 'black',
+            borderTopWidth: 0,
+            shadowOffset: { width:0, height:2 },
+            shadowColor: 'black',
+            shadowOpacity: 1,
+            elevation: 10,
+            paddingVertical: 10,
+            height: 60,
+        }
+    }
+})
 
 const styles = StyleSheet.create({
     container: {
@@ -38,6 +93,10 @@ const styles = StyleSheet.create({
     },
     fontColor:{
         color:'#fff'
+    },
+    adsHolder:{
+        position: 'absolute',
+        bottom: 0
     }
 });
 

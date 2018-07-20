@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+
+import { AdMobBanner } from 'expo';
 
 
 class Inbox extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.fontColor}>Chart page</Text>
+                <AdMobBanner
+                    bannerSize="smartBannerPortrait"
+                    adUnitID="ca-app-pub-4762076392786064/7640436040" // Test ID, Replace with your-admob-unit-id
+                    testDeviceID="EMULATOR"
+                    onDidFailToReceiveAdWithError={this.bannerError}
+                    style={styles.adsHolder}
+                />
             </View>
         );
     }
@@ -23,5 +31,9 @@ const styles = StyleSheet.create({
     },
     fontColor:{
         color:'#fff'
+    },
+    adsHolder:{
+        position: 'absolute',
+        bottom: 0
     }
 });

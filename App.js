@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View,SafeAreaView,TextInput, Button, Alert, TouchableOpacity } from 'react-native';
-import { createBottomTabNavigator,createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
-import Home from './screens/Home';
+import Home from './screens/Home'
 import Loginlogo from './component/loginlogo/loginlogo';
-import Profile from './screens/Profile';
-import Chart from './screens/Chart';
+
 
 
 class LoginActivity extends React.Component {
@@ -78,8 +77,8 @@ class LoginActivity extends React.Component {
         const { userName }  = this.state ;
         const { userPassword }  = this.state ;
 
-        // fetch('http://investorsukses.com/reactphp/login.php',{
-        fetch('http://192.168.100.2:8888/reactphp/login.php',{
+        fetch('http://investorsukses.com/reactphp/login.php',{
+        // fetch('http://localhost:8888/reactphp/login.php',{
            method: 'post',
             headers: {
                'Accept': 'application/json',
