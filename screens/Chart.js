@@ -10,7 +10,7 @@ class Inbox extends Component {
             <View style={styles.container}>
                 <AdMobBanner
                     bannerSize="smartBannerPortrait"
-                    adUnitID="ca-app-pub-4762076392786064/7640436040" // Test ID, Replace with your-admob-unit-id
+                    adUnitID="ca-app-pub-4762076392786064/7640436040"
                     testDeviceID="EMULATOR"
                     onDidFailToReceiveAdWithError={this.bannerError}
                     style={styles.adsHolder}

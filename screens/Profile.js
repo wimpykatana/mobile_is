@@ -6,7 +6,7 @@ import { AdMobBanner } from 'expo';
 class Inbox extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             data: this.props.navigation.state.params.Data,
         }
@@ -26,7 +26,7 @@ class Inbox extends Component {
 
                 <AdMobBanner
                     bannerSize="smartBannerPortrait"
-                    adUnitID="ca-app-pub-4762076392786064/7640436040" // Test ID, Replace with your-admob-unit-id
+                    adUnitID="ca-app-pub-4762076392786064/7640436040"
                     testDeviceID="EMULATOR"
                     onDidFailToReceiveAdWithError={this.bannerError}
                     style={styles.adsHolder}

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View,SafeAreaView,TextInput, Button, Alert, Touchable
 import { createStackNavigator } from 'react-navigation';
 
 import Home from './screens/Home'
-import Loginlogo from './component/loginlogo/loginlogo';
+import Loginlogo from './component/loginlogo';
 
 
 
@@ -72,7 +72,6 @@ class LoginActivity extends React.Component {
     }
 
     UserLoginFunction = () => {
-        console.log("click button");
 
         const { userName }  = this.state ;
         const { userPassword }  = this.state ;
