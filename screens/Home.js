@@ -20,6 +20,7 @@ class Home extends Component {
     async componentDidMount(){
         this.setState({ loading : true });
 
+        //query musti masih dibenerin
         await fetch('http://investorsukses.com/reactphp/getposts.php',{
             method: 'get',
             headers: {
