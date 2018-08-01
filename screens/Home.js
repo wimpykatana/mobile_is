@@ -1,23 +1,52 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, SafeAreaView, ActivityIndicator,ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, ActivityIndicator,ScrollView,AsyncStorage } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import { AdMobBanner } from 'expo';
 import Chart from './Chart';
 import Profile from './Profile';
 import PostItem from '../component/postitem';
 
+let userid;
+let username;
+let usergender;
+let usergroup;
+let subscribe;
+let userpicture;
+
 class Home extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            data: this.props.navigation.state.params.Data,
             loading: false,
             posts: []
         }
     }
 
+    async getToken(){
+        try{
+            userid = await AsyncStorage.getItem('userid');
+            username = await AsyncStorage.getItem('username');
+            usergender = await AsyncStorage.getItem('usergender');
+            usergroup = await AsyncStorage.getItem('usergroup');
+            subscribe = await AsyncStorage.getItem('subscribe');
+            userpicture = await AsyncStorage.getItem('userpicture');
+
+            console.log("--------------------------------------------");
+            console.log("userid: "+userid);
+            console.log("username: "+username);
+            console.log("usergender: "+usergender);
+            console.log("usergroup: "+usergroup);
+            console.log("subscribe: "+subscribe);
+            console.log("userpicture: "+userpicture);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+
     async componentDidMount(){
+        this.getToken();
         this.setState({ loading : true });
 
         //query musti masih dibenerin
@@ -35,6 +64,7 @@ class Home extends Component {
     }
 
     render() {
+
         if(this.state.loading){
             return(
                 <SafeAreaView style={styles.container}>
@@ -47,11 +77,13 @@ class Home extends Component {
 
                     <SafeAreaView style={styles.container}>
                         <View>
-                            <Text>{this.state.data.username}</Text>
-                            <Text>{this.state.data.usergender}</Text>
-                            <Text>{this.state.data.userid}</Text>
-                            <Text>{this.state.data.usergroup}</Text>
-                            <Text>{this.state.data.subscribe}</Text>
+                            <Text>{username}</Text>
+                            <Text>{usergender}</Text>
+                            <Text>{userid}</Text>
+                            <Text>{usergroup}</Text>
+                            <Text>{subscribe}</Text>
+                            <Text>----------------</Text>
+
                         </View>
                         <ScrollView style={{marginBottom:60}} showsVerticalScrollIndicator={false}>
                                 {this.state.posts.map((post, i) => (

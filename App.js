@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View,SafeAreaView,TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View,SafeAreaView,TextInput, Button, Alert, TouchableOpacity,AsyncStorage } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import Home from './screens/Home'
 import Loginlogo from './component/loginlogo';
-
 
 
 class LoginActivity extends React.Component {
@@ -17,6 +16,80 @@ class LoginActivity extends React.Component {
         }
 
     }
+
+    componentDidMount(){
+        this._loadtoken();
+    }
+
+    _loadtoken = async () =>{
+        var isTokenready = await AsyncStorage.getItem('access_token');
+
+        if(isTokenready !== null){
+            this.props.navigation.navigate('Home');
+        }
+
+    }
+
+    UserLoginFunction = () => {
+
+        const { userName }  = this.state ;
+        const { userPassword }  = this.state ;
+
+        //fetch('http://investorsukses.com/reactphp/login.php',{
+        fetch('http://192.168.100.12:8888/reactphp/login.php',{
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                'username': this.state.userName,
+                'password': this.state.userPassword
+            })
+        })
+            .then((respon) => respon.json())
+            .then((res)=> {
+                if(res.message === 'Data Matched')
+                {
+                    //this.storeToken(res.usertoken);
+                    AsyncStorage.setItem('access_token',res.usertoken);
+                    AsyncStorage.setItem('userid',res.userid);
+                    AsyncStorage.setItem('username',res.username);
+                    AsyncStorage.setItem('usergender',res.usergender);
+                    AsyncStorage.setItem('usergroup',res.usergroup);
+                    AsyncStorage.setItem('subscribe',res.subscribe);
+                    AsyncStorage.setItem('userpicture',res.userpicture);
+
+                    //Then open Profile activity and send user email to profile activity.
+                    this.props.navigation.navigate('Home');
+                }
+                else{
+                    this.removeToken();
+                    Alert.alert(res);
+                }
+            }).catch(( error )=>{
+            this.removeToken();
+            console.error(error);
+        })
+    }
+
+
+    // async getToken(){
+    //     try{
+    //         let token = await AsyncStorage.getItem('access_token');
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // }
+
+    // async removeToken(){
+    //     try{
+    //         await AsyncStorage.removeItem('access_token');
+    //         this.getToken();
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // }
 
     render() {
         return (
@@ -71,39 +144,7 @@ class LoginActivity extends React.Component {
         );
     }
 
-    UserLoginFunction = () => {
 
-        const { userName }  = this.state ;
-        const { userPassword }  = this.state ;
-
-        fetch('http://investorsukses.com/reactphp/login.php',{
-        // fetch('http://localhost:8888/reactphp/login.php',{
-           method: 'post',
-            headers: {
-               'Accept': 'application/json',
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                'username': this.state.userName,
-                'password': this.state.userPassword
-            })
-        })
-            .then((respon) => respon.json())
-            .then((res)=> {
-                if(res.message === 'Data Matched')
-                {
-                    //Alert.alert(res.username+" "+res.userid+" "+res.usergender+" "+res.usergroup);
-                    //Then open Profile activity and send user email to profile activity.
-                    this.props.navigation.navigate('Home', { Data: res });
-                }
-                else{
-
-                    Alert.alert(res);
-                }
-            }).catch(( error )=>{
-                console.error(error);
-            })
-    }
 }
 
 export default MainProject = createStackNavigator(
