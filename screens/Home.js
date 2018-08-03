@@ -31,14 +31,6 @@ class Home extends Component {
             usergroup = await AsyncStorage.getItem('usergroup');
             subscribe = await AsyncStorage.getItem('subscribe');
             userpicture = await AsyncStorage.getItem('userpicture');
-
-            console.log("--------------------------------------------");
-            console.log("userid: "+userid);
-            console.log("username: "+username);
-            console.log("usergender: "+usergender);
-            console.log("usergroup: "+usergroup);
-            console.log("subscribe: "+subscribe);
-            console.log("userpicture: "+userpicture);
         }catch(error){
             console.log(error);
         }
@@ -83,7 +75,6 @@ class Home extends Component {
                             <Text>{usergroup}</Text>
                             <Text>{subscribe}</Text>
                             <Text>----------------</Text>
-
                         </View>
                         <ScrollView style={{marginBottom:60}} showsVerticalScrollIndicator={false}>
                                 {this.state.posts.map((post, i) => (
