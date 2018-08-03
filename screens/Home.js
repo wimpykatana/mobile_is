@@ -81,13 +81,13 @@ class Home extends Component {
                                     <PostItem key={i} image={post.image}/>
                                 ))}
                         </ScrollView>
-                        <View style={styles.container}>
+                        <View style={styles.adsHolder}>
                             <AdMobBanner
                                 bannerSize="smartBannerPortrait"
                                 adUnitID="ca-app-pub-4762076392786064/7640436040"
                                 testDeviceID="EMULATOR"
                                 onDidFailToReceiveAdWithError={this.bannerError}
-                                style={styles.adsHolder}/>
+                            />
                         </View>
                     </SafeAreaView>
             )
