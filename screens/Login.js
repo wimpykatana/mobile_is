@@ -14,20 +14,6 @@ class Login extends React.Component {
 
     }
 
-    componentDidMount(){
-        this._loadtoken();
-        this.getToken();
-    }
-
-    _loadtoken = async () =>{
-        var isTokenready = await AsyncStorage.getItem('access_token');
-
-        if(isTokenready !== null){
-            this.props.navigation.navigate('Home');
-        }
-
-    }
-
     UserLoginFunction = () => {
 
         const { userName }  = this.state ;
@@ -69,14 +55,6 @@ class Login extends React.Component {
         })
     }
 
-
-    async getToken(){
-        try{
-            let token = await AsyncStorage.getItem('access_token');
-        }catch(error){
-            console.log(error);
-        }
-    }
 
     render() {
 

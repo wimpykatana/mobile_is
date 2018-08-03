@@ -11,7 +11,7 @@ class AuthLoadingScreen extends React.Component {
         this._bootstrapAsync();
     }
     _bootstrapAsync = async () => {
-        const userToken = await AsyncStorage.getItem('userToken');
+        const userToken = await AsyncStorage.getItem('access_token');
 
         // This will switch to the App screen or Auth screen and this loading
         // screen will be unmounted and thrown away.
@@ -23,6 +23,7 @@ class AuthLoadingScreen extends React.Component {
         return (
             <SafeAreaView style={styles.container}>
                 <ActivityIndicator size="large" />
+                <Text style={styles.fontColor}>Loading</Text>
             </SafeAreaView>
         );
     }
@@ -47,5 +48,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
       justifyContent: 'center',
       paddingTop: 30
-  }
+  },
+    fontColor:{
+        color:'#fff'
+    },
 });
