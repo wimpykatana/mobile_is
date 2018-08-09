@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, SafeAreaView, ActivityIndicator,ScrollView,AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, ActivityIndicator,ScrollView,AsyncStorage,StatusBar } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import { AdMobBanner } from 'expo';
 import Chart from './Chart';
 import Profile from './Profile';
 import PostItem from '../component/postitem';
+import Userheader from '../component/userheader';
 
 let userid;
 let username;
@@ -59,24 +60,23 @@ class Home extends Component {
 
         if(this.state.loading){
             return(
-                <SafeAreaView style={styles.container}>
-                    <ActivityIndicator size="large"/>
-                    <Text style={styles.fontColor}>Loading</Text>
+                <SafeAreaView style={styles.containerLoading}>
+                    <View style={{flex:1, alignItems: 'center', justifyContent: 'center' }}>
+                        <ActivityIndicator size="large"/>
+                        <Text style={styles.fontColor}>Loading</Text>
+                    </View>
                 </SafeAreaView>
             )
         }else{
             return (
 
                     <SafeAreaView style={styles.container}>
-                        <View>
-                            <Text>{username}</Text>
-                            <Text>{usergender}</Text>
-                            <Text>{userid}</Text>
-                            <Text>{usergroup}</Text>
-                            <Text>{subscribe}</Text>
-                            <Text>----------------</Text>
-                        </View>
-                        <ScrollView style={{marginBottom:60, flex: 1 }} showsVerticalScrollIndicator={false}>
+                        <StatusBar
+                            barStyle="light-content"
+                        />
+                        <Userheader style={{flex: 1}} />
+
+                        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
                                 {this.state.posts
                                     .map((post, i) => (
                                     <PostItem key={i} image={post.image}/>
@@ -149,17 +149,19 @@ export default createBottomTabNavigator({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#000',
+
+    },
+    containerLoading:{
+        flex: 1,
         backgroundColor: '#333',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     fontColor:{
         color:'#fff'
     },
     adsHolder:{
-        position: 'absolute',
-        bottom: 0,
-        flex: 2
+        height: 50,
+        justifyContent: 'center'
     },
 });
 

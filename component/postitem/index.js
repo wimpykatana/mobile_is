@@ -61,10 +61,10 @@ class PostItem extends React.Component{
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#333',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 10
+        paddingBottom: 10
     },
     canvas: {
         width: 320,

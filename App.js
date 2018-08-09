@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View,SafeAreaView,TextInput, Button, Alert, TouchableOpacity, AsyncStorage,ActivityIndicator } from 'react-native';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
-
 import Home from './screens/Home';
 import Login from './screens/Login';
+
+import { StyleSheet, Text, View,SafeAreaView,TextInput, Button, Alert, TouchableOpacity, AsyncStorage, ActivityIndicator } from 'react-native';
 
 class AuthLoadingScreen extends React.Component {
     constructor() {
