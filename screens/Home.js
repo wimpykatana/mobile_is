@@ -76,8 +76,9 @@ class Home extends Component {
                             <Text>{subscribe}</Text>
                             <Text>----------------</Text>
                         </View>
-                        <ScrollView style={{marginBottom:60}} showsVerticalScrollIndicator={false}>
-                                {this.state.posts.map((post, i) => (
+                        <ScrollView style={{marginBottom:60, flex: 1 }} showsVerticalScrollIndicator={false}>
+                                {this.state.posts
+                                    .map((post, i) => (
                                     <PostItem key={i} image={post.image}/>
                                 ))}
                         </ScrollView>
@@ -157,7 +158,8 @@ const styles = StyleSheet.create({
     },
     adsHolder:{
         position: 'absolute',
-        bottom: 0
+        bottom: 0,
+        flex: 2
     },
 });
 

@@ -35,7 +35,7 @@ class Login extends React.Component {
             .then((res)=> {
                 if(res.message === 'Data Matched')
                 {
-                    //this.storeToken(res.usertoken);
+                    //Store all the AsyncStorage
                     AsyncStorage.setItem('access_token',res.usertoken);
                     AsyncStorage.setItem('userid',res.userid);
                     AsyncStorage.setItem('username',res.username);
