@@ -22,7 +22,6 @@ class AuthLoadingScreen extends React.Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-
             </SafeAreaView>
         );
     }

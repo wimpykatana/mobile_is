@@ -39,7 +39,6 @@ class PostItem extends React.Component{
                             });
                         }}
                     >
-
                         <Image
                         source={{uri: 'http://investorsukses.com/content/uploads/'+this.props.image}}
                         resizeMode= "contain"
@@ -47,16 +46,11 @@ class PostItem extends React.Component{
                         />
                     </TouchableOpacity>
 
-
                     <ImageView
                         images={images}
                         imageIndex={0}
                         isVisible={this.state.isImageViewVisible}
-                        renderFooter={(currentImage) => (<View><Text>My footer</Text></View>)}
                     />
-
-
-
 
                 </View>
             </View>

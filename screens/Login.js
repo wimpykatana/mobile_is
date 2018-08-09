@@ -11,12 +11,11 @@ class Login extends React.Component {
             userName: '',
             userPassword: ''
         }
-
     }
 
     UserLoginFunction = () => {
 
-        const { userName }  = this.state ;
+        const { userName }  = this.state;
         const { userPassword }  = this.state ;
 
         fetch('http://investorsukses.com/reactphp/login.php',{
