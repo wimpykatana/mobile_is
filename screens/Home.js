@@ -20,40 +20,50 @@ class Home extends Component {
         super(props);
         this.state = {
             loading: false,
+            useridreact: null,
             posts: []
         }
     }
 
     async getToken(){
         try{
-            userid = await AsyncStorage.getItem('userid');
-            username = await AsyncStorage.getItem('username');
-            usergender = await AsyncStorage.getItem('usergender');
-            usergroup = await AsyncStorage.getItem('usergroup');
-            subscribe = await AsyncStorage.getItem('subscribe');
-            userpicture = await AsyncStorage.getItem('userpicture');
+            // userid = await AsyncStorage.getItem('userid');
+            this.setState({
+                useridreact: await AsyncStorage.getItem('userid'),
+            });
+
         }catch(error){
             console.log(error);
         }
+
+        this.getUserPost();
     }
 
-
-    async componentDidMount(){
-        this.getToken();
-        this.setState({ loading : true });
+    getUserPost(){
 
         //query musti masih dibenerin
-        await fetch('http://investorsukses.com/reactphp/getposts.php',{
-            method: 'get',
+        fetch('http://investorsukses.com/reactphp/getposts.php',{
+            method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-type': 'application/json',
             },
+            body: JSON.stringify({
+                'user': this.state.useridreact,
+            })
         })
             .then((respon) => respon.json())
             .then((res)=> {
                 this.setState({ loading : false, posts: res });
             })
+    }
+
+
+    async componentDidMount(){
+
+        this.getToken();
+        this.setState({ loading : true });
+
     }
 
     render() {
@@ -76,10 +86,10 @@ class Home extends Component {
                         />
                         <Userheader style={{flex: 1}} />
 
-                        <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+                        <ScrollView style={{ flex: 1, backgroundColor:"#333" }} showsVerticalScrollIndicator={false}>
                                 {this.state.posts
                                     .map((post, i) => (
-                                    <PostItem key={i} image={post.image}/>
+                                    <PostItem key={i} data={post}/>
                                 ))}
                         </ScrollView>
                         <View style={styles.adsHolder}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions,TouchableOpacity,ActivityIndicator } from 'react-native';
 import ImageView from 'react-native-image-view';
 
 const {width} = Dimensions.get('window');
@@ -15,7 +15,9 @@ class PostItem extends React.Component{
             isImageViewVisible: false,
         }
 
-        imagesSource = 'http://investorsukses.com/content/uploads/' + this.props.image;
+        imagesSource = 'http://investorsukses.com/content/uploads/' + this.props.data.image;
+
+        // console.log(this.props.data.image);
 
         images = [{
             source: {
@@ -29,29 +31,33 @@ class PostItem extends React.Component{
     render(){
         return(
             <View style={{flex: 1}}>
-                <View style={styles.container}>
-                    <Text style={{ flex:1 }}>{'http://investorsukses.com/content/uploads/'+this.props.image}</Text>
+                <View style={styles.containerPost}>
 
-                    <TouchableOpacity
-                        onPress={() => {
-                            this.setState({
-                                isImageViewVisible: true,
-                            });
-                        }}
-                    >
-                        <Image
-                        source={{uri: 'http://investorsukses.com/content/uploads/'+this.props.image}}
-                        resizeMode= "contain"
-                        style={styles.canvas}
-                        />
-                    </TouchableOpacity>
+                    <View style={styles.containerText}>
+                        <Text style={ styles.text }>{ this.props.data.text }</Text>
+                    </View>
 
+                    <View style={styles.containerImage}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                this.setState({
+                                    isImageViewVisible: true,
+                                });
+                            }}
+                        >
+                            <Image
+                            source={{uri: 'http://investorsukses.com/content/uploads/'+ this.props.data.image}}
+                            resizeMode= "contain"
+                            style={styles.canvas}
+                            />
+
+                        </TouchableOpacity>
+                    </View>
                     <ImageView
                         images={images}
                         imageIndex={0}
                         isVisible={this.state.isImageViewVisible}
                     />
-
                 </View>
             </View>
         );
@@ -60,16 +66,28 @@ class PostItem extends React.Component{
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#333',
-        justifyContent: 'center',
+    containerPost: {
+        backgroundColor: '#fff',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        marginBottom: 10,
+        // alignItems: 'center',
+        flexDirection: 'column-reverse'
+    },
+    containerImage:{
         alignItems: 'center',
-        paddingBottom: 10
+    },
+    containerText:{
+        // justifyContent: 'flex-start'
+        alignItems: 'center'
     },
     canvas: {
-        width: 320,
-        height: 250
+        minWidth: 320,
+        minHeight: 180
     },
+    text:{
+        color: '#000',
+    }
 });
 
 export default PostItem;
