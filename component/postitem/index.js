@@ -34,7 +34,7 @@ class PostItem extends React.Component{
                 <View style={styles.containerPost}>
 
                     <View style={styles.containerText}>
-                        <Text style={ styles.text }>{ this.props.data.text }</Text>
+                        <Text style={ styles.text }>{ this.props.data.text } { this.props.data.post_id }</Text>
                     </View>
 
                     <View style={styles.containerImage}>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingVertical: 5,
         paddingHorizontal: 10,
-        marginBottom: 10,
+        // marginBottom: 10,
         // alignItems: 'center',
         flexDirection: 'column-reverse'
     },

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, SafeAreaView, ActivityIndicator,ScrollView,AsyncStorage,StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, ActivityIndicator,ScrollView,AsyncStorage,StatusBar,FlatList } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import { AdMobBanner } from 'expo';
 import Chart from './Chart';
@@ -7,12 +7,6 @@ import Profile from './Profile';
 import PostItem from '../component/postitem';
 import Userheader from '../component/userheader';
 
-let userid;
-let username;
-let usergender;
-let usergroup;
-let subscribe;
-let userpicture;
 
 class Home extends Component {
 
@@ -21,13 +15,15 @@ class Home extends Component {
         this.state = {
             loading: false,
             useridreact: null,
+            refreshing: false,
+            page: null,
             posts: []
         }
     }
 
     async getToken(){
         try{
-            // userid = await AsyncStorage.getItem('userid');
+
             this.setState({
                 useridreact: await AsyncStorage.getItem('userid'),
             });
@@ -36,13 +32,13 @@ class Home extends Component {
             console.log(error);
         }
 
-        this.getUserPost();
+        // this.getUserPost();
     }
 
-    getUserPost(){
+    getUserPost = () =>{
 
-        //query musti masih dibenerin
         fetch('http://investorsukses.com/reactphp/getposts.php',{
+        // fetch('http://192.168.100.6:8888/reactphp/getposts.php',{
             method: 'post',
             headers: {
                 'Accept': 'application/json',
@@ -50,24 +46,55 @@ class Home extends Component {
             },
             body: JSON.stringify({
                 'user': this.state.useridreact,
+                'page': this.state.page
             })
         })
-            .then((respon) => respon.json())
-            .then((res)=> {
-                this.setState({ loading : false, posts: res });
+            .then(respon => respon.json())
+            .then(res => {
+                this.setState({
+                    loading : false,
+                    posts: [...this.state.posts, ...res],
+                    refreshing: false });
             })
+        console.log("fetch data")
+        console.log(this.state.page)
+    }
+
+    handleEndList = () =>{
+
+        console.log("handle end list");
+        this.setState({
+            refreshing: true,
+            page: this.state.page + 1,
+        },() => {
+            this.getUserPost()
+        });
+    }
+
+    handleRefresh = () => {
+
+        console.log('refreshing')
+        this.setState({ refreshing: true },() => {
+            this.getUserPost()
+        });
+
+    }
+
+    renderSeparator = () => {
+        return(
+            <View
+                style={{ height: 10, width:'100%', backgroundColor: '#333'}}>
+            </View>
+        )
     }
 
 
     async componentDidMount(){
-
-        this.getToken();
         this.setState({ loading : true });
-
+        this.getToken();
     }
 
     render() {
-
         if(this.state.loading){
             return(
                 <SafeAreaView style={styles.containerLoading}>
@@ -86,12 +113,25 @@ class Home extends Component {
                         />
                         <Userheader style={{flex: 1}} />
 
-                        <ScrollView style={{ flex: 1, backgroundColor:"#333" }} showsVerticalScrollIndicator={false}>
-                                {this.state.posts
-                                    .map((post, i) => (
-                                    <PostItem key={i} data={post}/>
-                                ))}
-                        </ScrollView>
+
+                        <View style={{ flex: 1, backgroundColor:"#333" }} >
+                            <FlatList
+                                data={this.state.posts}
+                                renderItem={
+                                    ({item}) => <PostItem data={item} />
+                                    // ({item}) => <Text>{item.text}</Text>
+                                }
+                                ItemSeparatorComponent={this.renderSeparator}
+                                onRefresh={this.handleRefresh}
+                                refreshing={this.state.refreshing}
+                                keyExtractor={(item, index) => index.toString()}
+                                onEndReached={ this.handleEndList }
+                                onEndTreshold = {0}
+                                showsVerticalScrollIndicator={false}
+
+                            />
+                        </View>
+
                         <View style={styles.adsHolder}>
                             <AdMobBanner
                                 bannerSize="smartBannerPortrait"

@@ -38,7 +38,7 @@ class Userheader extends Component{
 
                     <View style={{flex: 1, alignItems: 'flex-end'}}>
                         <Image
-                            source={{uri: 'http://investorsukses.com/content/uploads/'+userpicture}}
+                            source={{uri: 'http://investorsukses.com/content/uploads/'+ userpicture}}
                             style={styles.avatar}
                         />
                     </View>

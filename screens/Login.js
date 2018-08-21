@@ -9,17 +9,47 @@ class Login extends React.Component {
         super(props)
         this.state = {
             userName: '',
-            userPassword: ''
+            userPassword: '',
+            loginUser: []
         }
     }
+
+    storeStorage = async() =>{
+        //Store all the AsyncStorage
+        //
+        // await AsyncStorage.multiSet([
+        //     ['token', token],
+        //     ['permissions', JSON.stringify(permissions)]
+        // ]);
+        try {
+            await AsyncStorage.multiSet([
+                ['access_token', this.state.loginUser[0].user_token],
+                ['userid', JSON.stringify(this.state.loginUser[0].user_id)],
+                ['username', this.state.loginUser[0].user_name],
+                ['usergender', this.state.loginUser[0].user_gender],
+                ['usergroup', JSON.stringify(this.state.loginUser[0].user_group)],
+                ['subscribe', JSON.stringify(this.state.loginUser[0].subscribe)],
+                ['userpicture', this.state.loginUser[0].user_picture]
+            ]);
+        }catch (error) {
+            // Error saving data
+            console.log(error)
+        }
+
+    }
+
+
 
     UserLoginFunction = () => {
 
         const { userName }  = this.state;
         const { userPassword }  = this.state ;
 
-        fetch('http://investorsukses.com/reactphp/login.php',{
-            // fetch('http://192.168.100.12:8888/reactphp/login.php',{
+        // fetch('http://localhost:3000/api/meetups')
+        //     .then(res => res.json());
+
+        //fetch('http://investorsukses.com/reactphp/login.php',{
+        fetch('http://192.168.100.6:3000/login',{
             method: 'post',
             headers: {
                 'Accept': 'application/json',
@@ -30,28 +60,32 @@ class Login extends React.Component {
                 'password': this.state.userPassword
             })
         })
-            .then((respon) => respon.json())
-            .then((res)=> {
-                if(res.message === 'Data Matched')
-                {
-                    //Store all the AsyncStorage
-                    AsyncStorage.setItem('access_token',res.usertoken);
-                    AsyncStorage.setItem('userid',res.userid);
-                    AsyncStorage.setItem('username',res.username);
-                    AsyncStorage.setItem('usergender',res.usergender);
-                    AsyncStorage.setItem('usergroup',res.usergroup);
-                    AsyncStorage.setItem('subscribe',res.subscribe);
-                    AsyncStorage.setItem('userpicture',res.userpicture);
+            .then(res => res.json())
+            .then((data)=> {
+
+                // console.log(this.state.loginUser)
+                // console.log(this.state.loginUser[0].user_fullname)
+                if(data.message === 'valid') {
+
+                    this.setState({
+                        loginUser: data.response
+                    })
+
+                    this.storeStorage();
+
+                    // console.log(this.state.loginUser);
+
 
                     //Then open Profile activity and send user email to profile activity.
                     this.props.navigation.navigate('Home');
                 }
                 else{
-                    Alert.alert(res);
+                    Alert.alert(data.message);
                 }
-            }).catch(( error )=>{
-            console.error(error);
-        })
+            })
+            // .catch(( error )=>{
+            //     console.error(error);
+            // })
     }
 
 
