@@ -98,6 +98,10 @@ class Home extends Component {
         if(this.state.loading){
             return(
                 <SafeAreaView style={styles.containerLoading}>
+                    <StatusBar
+                        barStyle="light-content"
+                    />
+                    <Userheader style={{flex: 1}} />
                     <View style={{flex:1, alignItems: 'center', justifyContent: 'center' }}>
                         <ActivityIndicator size="large"/>
                         <Text style={styles.fontColor}>Loading</Text>
