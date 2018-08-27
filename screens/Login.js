@@ -43,7 +43,7 @@ class Login extends React.Component {
         //     .then(res => res.json());
 
         // fetch('http://investorsukses.com:3000/login',{
-        fetch('http://192.168.100.6:3000/login',{
+        fetch('http://192.168.100.12:3000/login',{
             method: 'post',
             headers: {
                 'Accept': 'application/json',

@@ -16,7 +16,7 @@ class Home extends Component {
             loading: false,
             useridreact: null,
             refreshing: false,
-            page: 1,
+            page: 0,
             posts: []
         }
     }
@@ -38,16 +38,12 @@ class Home extends Component {
     getUserPost = () =>{
 
         // fetch('http://investorsukses.com:3000/posts',{
-        fetch('http://192.168.100.6:3000/posts',{
-            method: 'post',
+        fetch(`http://192.168.100.12:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
+            method: 'get',
             headers: {
                 'Accept': 'application/json',
                 'Content-type': 'application/json',
             },
-            body: JSON.stringify({
-                'userid': this.state.useridreact,
-                // 'page': this.state.page
-            })
         })
             .then(res => res.json())
             .then((data) => {
@@ -56,10 +52,11 @@ class Home extends Component {
 
                 this.setState({
                     loading : false,
-                    posts: data.response,
+                    posts: [...this.state.posts, ...data.response],
                     refreshing: false
                 });
             })
+        console.log(this.state.useridreact)
         console.log("fetch data")
         console.log(this.state.page)
     }
@@ -78,7 +75,7 @@ class Home extends Component {
     handleRefresh = () => {
 
         console.log('refreshing')
-        this.setState({ refreshing: true },() => {
+        this.setState({ refreshing: true,  page: 0 },() => {
             this.getUserPost()
         });
 
