@@ -37,8 +37,8 @@ class Home extends Component {
 
     getUserPost = () =>{
 
-        // fetch('http://investorsukses.com:3000/posts',{
-        fetch(`http://192.168.100.12:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
+        fetch(`http://investorsukses.com:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
+        // fetch(`http://192.168.100.12:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
             method: 'get',
             headers: {
                 'Accept': 'application/json',
