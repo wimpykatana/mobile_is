@@ -16,7 +16,7 @@ class Home extends Component {
             loading: false,
             useridreact: null,
             refreshing: false,
-            page: null,
+            page: 1,
             posts: []
         }
     }
@@ -32,29 +32,33 @@ class Home extends Component {
             console.log(error);
         }
 
-        // this.getUserPost();
+        this.getUserPost();
     }
 
     getUserPost = () =>{
 
-        fetch('http://investorsukses.com/reactphp/getposts.php',{
-        // fetch('http://192.168.100.6:8888/reactphp/getposts.php',{
+        // fetch('http://investorsukses.com:3000/posts',{
+        fetch('http://192.168.100.6:3000/posts',{
             method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
-                'user': this.state.useridreact,
-                'page': this.state.page
+                'userid': this.state.useridreact,
+                // 'page': this.state.page
             })
         })
-            .then(respon => respon.json())
-            .then(res => {
+            .then(res => res.json())
+            .then((data) => {
+
+                // console.log(data)
+
                 this.setState({
                     loading : false,
-                    posts: [...this.state.posts, ...res],
-                    refreshing: false });
+                    posts: data.response,
+                    refreshing: false
+                });
             })
         console.log("fetch data")
         console.log(this.state.page)
@@ -204,11 +208,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000',
-
     },
     containerLoading:{
         flex: 1,
-        backgroundColor: '#333',
+        backgroundColor: '#000',
     },
     fontColor:{
         color:'#fff'

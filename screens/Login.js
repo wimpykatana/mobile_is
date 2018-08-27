@@ -15,12 +15,6 @@ class Login extends React.Component {
     }
 
     storeStorage = async() =>{
-        //Store all the AsyncStorage
-        //
-        // await AsyncStorage.multiSet([
-        //     ['token', token],
-        //     ['permissions', JSON.stringify(permissions)]
-        // ]);
         try {
             await AsyncStorage.multiSet([
                 ['access_token', this.state.loginUser[0].user_token],
@@ -48,7 +42,7 @@ class Login extends React.Component {
         // fetch('http://localhost:3000/api/meetups')
         //     .then(res => res.json());
 
-        //fetch('http://investorsukses.com/reactphp/login.php',{
+        // fetch('http://investorsukses.com:3000/login',{
         fetch('http://192.168.100.6:3000/login',{
             method: 'post',
             headers: {
