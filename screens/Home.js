@@ -32,7 +32,7 @@ class Home extends Component {
             console.log(error);
         }
 
-        this.getUserPost();
+        this.getUserPostFirst();
     }
 
     getUserPost = () =>{
@@ -61,8 +61,33 @@ class Home extends Component {
         console.log(this.state.page)
     }
 
-    handleEndList = () =>{
+    getUserPostFirst = () =>{
 
+        fetch(`http://investorsukses.com:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
+            // fetch(`http://192.168.100.12:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+            },
+        })
+            .then(res => res.json())
+            .then((data) => {
+
+                // console.log(data)
+
+                this.setState({
+                    loading : false,
+                    posts: data.response,
+                    refreshing: false
+                });
+            })
+        console.log(this.state.useridreact)
+        console.log("fetch data first")
+    }
+
+    handleEndList = () =>{
+        console.log("-------------------");
         console.log("handle end list");
         this.setState({
             refreshing: true,
@@ -73,10 +98,11 @@ class Home extends Component {
     }
 
     handleRefresh = () => {
-
+        console.log("-------------------");
         console.log('refreshing')
-        this.setState({ refreshing: true,  page: 0 },() => {
-            this.getUserPost()
+        this.setState({ refreshing: true,
+            page: 0 },() => {
+            this.getUserPostFirst()
         });
 
     }
