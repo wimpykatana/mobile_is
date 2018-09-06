@@ -6,7 +6,7 @@ const {width} = Dimensions.get('window');
 let images = [];
 let imagesSource;
 
-class PostItem extends React.Component{
+class SingleChart extends React.Component{
 
 
     constructor(props) {
@@ -15,27 +15,27 @@ class PostItem extends React.Component{
             isImageViewVisible: false,
         }
 
-        imagesSource = 'http://investorsukses.com/content/uploads/' + this.props.data.image;
+        this.updatedata = this.updatedata.bind(this)
+    }
 
-        // console.log(this.props.data.image);
+    componentDidMount(){
 
-        images = [{
-            source: {
-                uri: imagesSource,
-            },
-            width: 1366,
-            height: 768,
-        }];
+    }
+
+    updatedata = () =>{
+        console.log("-----update-----")
+        console.log(this.props.data)
+        imagesSource = this.props.data;
+        console.log(imagesSource)
+
     }
 
     render(){
+        this.updatedata()
         return(
             <View style={{flex: 1}}>
                 <View style={styles.containerPost}>
 
-                    <View style={styles.containerText}>
-                        <Text style={ styles.text }>{ this.props.data.text } { this.props.data.post_id }</Text>
-                    </View>
 
                     <View style={styles.containerImage}>
                         <TouchableOpacity
@@ -46,7 +46,7 @@ class PostItem extends React.Component{
                             }}
                         >
                             <Image
-                            source={{uri: 'http://investorsukses.com/content/uploads/'+ this.props.data.image}}
+                            source={{uri:  imagesSource }}
                             resizeMode= "contain"
                             style={styles.canvas}
                             />
@@ -54,7 +54,14 @@ class PostItem extends React.Component{
                         </TouchableOpacity>
                     </View>
                     <ImageView
-                        images={images}
+                        key={imagesSource}
+                        images={[{
+                            source: {
+                                uri: imagesSource,
+                            },
+                            width: 1366,
+                            height: 768,
+                        }]}
                         imageIndex={0}
                         isVisible={this.state.isImageViewVisible}
                         onClose={() => {
@@ -95,4 +102,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PostItem;
+export default SingleChart;
