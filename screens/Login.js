@@ -6,7 +6,7 @@ import Loginlogo from '../component/loginlogo';
 class Login extends React.Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             userName: '',
             userPassword: '',
@@ -46,7 +46,7 @@ class Login extends React.Component {
         // fetch('http://192.168.100.12:3000/login',{
             method: 'post',
             headers: {
-                'Accept': 'application/json',
+                Accept: 'application/json',
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({
@@ -54,7 +54,7 @@ class Login extends React.Component {
                 'password': this.state.userPassword
             })
         })
-            .then(res => res.json())
+            .then((res) => res.json())
             .then((data)=> {
 
                 // console.log(this.state.loginUser)
@@ -132,7 +132,18 @@ class Login extends React.Component {
                     >
                         <Text style={{fontSize: 14, fontWeight: '600', color: '#333'}}>Sign In</Text>
                     </TouchableOpacity>
+
+                    <View>
+                        <Text style={styles.register}
+                            onPress={() => {
+
+                                this.props.navigation.navigate('Register');
+                            }}
+                        >Dont have account register here !</Text>
+                    </View>
+
                 </View>
+
             </SafeAreaView>
         );
     }
@@ -145,7 +156,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#333',
         alignItems: 'center',
-        paddingTop: 30
     },
     fontColor:{
         color:'#333',
@@ -173,7 +183,12 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         alignItems: 'center',
 
+    },
+    register:{
+        color: '#f3ce21',
+        textDecorationLine: 'underline'
     }
+
 });
 
 export default Login;

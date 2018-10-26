@@ -119,6 +119,9 @@ class Home extends Component {
     async componentDidMount(){
         this.setState({ loading : true });
         this.getToken();
+        const usergroup = await AsyncStorage.getItem('usergroup');
+
+        console.log('User group: '+ usergroup)
     }
 
     render() {

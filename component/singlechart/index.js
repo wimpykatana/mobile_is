@@ -19,7 +19,7 @@ class SingleChart extends React.Component{
     }
 
     componentDidMount(){
-
+        // Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE);
     }
 
     updatedata = () =>{
@@ -43,6 +43,7 @@ class SingleChart extends React.Component{
                                 this.setState({
                                     isImageViewVisible: true,
                                 });
+                                // Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE);
                             }}
                         >
                             <Image
@@ -68,6 +69,7 @@ class SingleChart extends React.Component{
                             this.setState({
                                 isImageViewVisible: false,
                             });
+                            // Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
                         }}
                     />
                 </View>

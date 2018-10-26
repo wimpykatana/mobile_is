@@ -40,7 +40,7 @@ class Inbox extends Component {
             typeChart: null,
             ticker: null,
             isImageViewVisible: false,
-            chart: "http://investorsukses.com/amichart/api-rotiM15ARA.gif"
+            chart: "http://investorsukses.com/empty.gif"
         }
 
     }
