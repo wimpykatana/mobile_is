@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#333',
         alignItems: 'center',
+        paddingTop: 30
     },
     fontColor:{
         color:'#333',

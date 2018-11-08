@@ -17,7 +17,7 @@ class PostItem extends React.Component{
 
         imagesSource = 'http://investorsukses.com/content/uploads/' + this.props.data.image;
 
-        // console.log(this.props.data.image);
+        console.log(this.props.data.image);
 
         images = [{
             source: {
