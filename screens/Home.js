@@ -4,8 +4,8 @@ import { createBottomTabNavigator } from 'react-navigation';
 import { AdMobBanner } from 'expo';
 import Chart from './Chart';
 import Profile from './Profile';
-import PostItem from '../component/postitem';
 import Userheader from '../component/userheader';
+import Chat from '../component/chat';
 
 
 class Home extends Component {
@@ -35,94 +35,7 @@ class Home extends Component {
         this.getUserPostFirst();
     }
 
-    getUserPost = () =>{
 
-        fetch(`http://investorsukses.com:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
-        // fetch(`http://192.168.100.12:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
-            method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json',
-            },
-        })
-            .then(res => res.json())
-            .then((data) => {
-
-                // console.log(data)
-
-                this.setState({
-                    loading : false,
-                    posts: [...this.state.posts, ...data.response],
-                    refreshing: false
-                });
-            })
-        console.log(this.state.useridreact)
-        console.log("fetch data")
-        console.log(this.state.page)
-    }
-
-    getUserPostFirst = () =>{
-
-        fetch(`http://investorsukses.com:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
-            // fetch(`http://192.168.100.12:3000/posts/${encodeURIComponent(this.state.useridreact)}/${this.state.page}`,{
-            method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json',
-            },
-        })
-            .then(res => res.json())
-            .then((data) => {
-
-                // console.log(data)
-
-                this.setState({
-                    loading : false,
-                    posts: data.response,
-                    refreshing: false
-                });
-            })
-        console.log(this.state.useridreact)
-        console.log("fetch data first")
-    }
-
-    handleEndList = () =>{
-        console.log("-------------------");
-        console.log("handle end list");
-        this.setState({
-            refreshing: true,
-            page: this.state.page + 1,
-        },() => {
-            this.getUserPost()
-        });
-    }
-
-    handleRefresh = () => {
-        console.log("-------------------");
-        console.log('refreshing')
-        this.setState({ refreshing: true,
-            page: 0 },() => {
-            this.getUserPostFirst()
-        });
-
-    }
-
-    renderSeparator = () => {
-        return(
-            <View
-                style={{ height: 10, width:'100%', backgroundColor: '#333'}}>
-            </View>
-        )
-    }
-
-
-    async componentDidMount(){
-        this.setState({ loading : true });
-        this.getToken();
-        const usergroup = await AsyncStorage.getItem('usergroup');
-
-        console.log('User group: '+ usergroup)
-    }
 
     render() {
         if(this.state.loading){
@@ -149,21 +62,8 @@ class Home extends Component {
 
 
                         <View style={{ flex: 1, backgroundColor:"#333" }} >
-                            <FlatList
-                                data={this.state.posts}
-                                renderItem={
-                                    ({item}) => <PostItem data={item} />
-                                    // ({item}) => <Text>{item.text}</Text>
-                                }
-                                ItemSeparatorComponent={this.renderSeparator}
-                                onRefresh={this.handleRefresh}
-                                refreshing={this.state.refreshing}
-                                keyExtractor={(item, index) => index.toString()}
-                                onEndReached={ this.handleEndList }
-                                onEndTreshold = {0}
-                                showsVerticalScrollIndicator={false}
+                            <Chat/>
 
-                            />
                         </View>
 
                         <View style={styles.adsHolder}>
