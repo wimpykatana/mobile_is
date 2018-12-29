@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, StatusBar, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, StatusBar, TextInput,AsyncStorage, Image } from 'react-native';
 import Userheader from '../component/userheader';
 import { AdMobBanner } from 'expo';
 import { Dropdown } from 'react-native-material-dropdown';
 import SingleChart from '../component/singlechart';
 
 
-let typeChart = [{
+
+let typeChartAra = [{
     value: '',
     label: 'Instant Navigator'
 }, {
     value: 'ARA',
-    label: 'SNIPER'
-}, {
-    value: 'HMF',
-    label: 'POWER'
+    label: 'Hunter'
 }];
+
+let typeChartBiasa = [{
+    value: '',
+    label: 'Instant Navigator'
+}];
+
 
 let ticker = [{
     value: 'M15',
@@ -40,8 +44,27 @@ class Inbox extends Component {
             typeChart: null,
             ticker: null,
             isImageViewVisible: false,
+            userGroup: null,
             chart: "http://investorsukses.com/empty.gif"
         }
+
+        this.getGroup();
+
+    }
+
+    getGroup = async () => {
+
+        try{
+
+            this.setState({
+                userGroup: await AsyncStorage.getItem('usergroup'),
+            });
+
+        }catch(error){
+            console.log(error);
+        }
+
+        console.log(this.state.userGroup);
 
     }
 
@@ -66,8 +89,6 @@ class Inbox extends Component {
 
                 // images[0].source.uri = this.state.chart
             })
-
-
     }
 
     render() {
@@ -98,7 +119,7 @@ class Inbox extends Component {
 
                     <Dropdown
                         label='Type Chart'
-                        data={typeChart}
+                        data={this.state.userGroup == 4 ? typeChartAra : typeChartBiasa}
                         baseColor="rgba(0,0,0,.5)"
                         textColor="rgba(0,0,0,1)"
                         onChangeText={typeChart => this.setState({typeChart})}

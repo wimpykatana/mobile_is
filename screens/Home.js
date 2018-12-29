@@ -5,7 +5,6 @@ import { AdMobBanner } from 'expo';
 import Chart from './Chart';
 import Profile from './Profile';
 import Userheader from '../component/userheader';
-import Chat from '../component/chat';
 
 
 class Home extends Component {
@@ -21,19 +20,6 @@ class Home extends Component {
         }
     }
 
-    async getToken(){
-        try{
-
-            this.setState({
-                useridreact: await AsyncStorage.getItem('userid'),
-            });
-
-        }catch(error){
-            console.log(error);
-        }
-
-        this.getUserPostFirst();
-    }
 
 
 
@@ -61,9 +47,12 @@ class Home extends Component {
                         <Userheader style={{flex: 1}} />
 
 
-                        <View style={{ flex: 1, backgroundColor:"#333" }} >
-                            <Chat/>
-
+                        <View style={{ flex: 1, backgroundColor:"#fff", alignItems:"center" }} >
+                            <Text>Cara pakai chart</Text>
+                            <Text>klik icon chart  kemudian isi nama saham di stock symbol</Text>
+                            <Text>kemudian isi jenis chart di type chart</Text>
+                            <Text>lalu isi ticker time frame chart 15m 1hour daily weekly</Text>
+                            <Text>dan klik request chart</Text>
                         </View>
 
                         <View style={styles.adsHolder}>

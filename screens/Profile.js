@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image,Button,StatusBar,AsyncStorage, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image,Button,StatusBar,AsyncStorage, TouchableOpacity,SafeAreaView } from 'react-native';
 import { AdMobBanner } from 'expo';
+import Userheader from '../component/userheader';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 
@@ -16,25 +17,38 @@ class Inbox extends Component {
         this.props.navigation.navigate('AuthLoading');
     };
 
+
+
     render() {
         return (
-            <View style={styles.container}>
 
-                <TouchableOpacity
-                    style={styles.buttonStyle}
-                    onPress={this._signOutAsync}
-                >
-                    <Text style={{fontSize: 14, fontWeight: '600', color: '#333'}}>Sign Out</Text>
-                </TouchableOpacity>
-
-                <AdMobBanner
-                    bannerSize="smartBannerPortrait"
-                    adUnitID="ca-app-pub-4762076392786064/7640436040"
-                    testDeviceID="EMULATOR"
-                    onDidFailToReceiveAdWithError={this.bannerError}
-                    style={styles.adsHolder}
+            <SafeAreaView style={styles.container}>
+                <StatusBar
+                    barStyle="light-content"
                 />
-            </View>
+                <Userheader style={{flex: 1}} />
+
+
+                <View style={{ flex: 1, backgroundColor:"#fff", alignItems:"center"  }} >
+                    <TouchableOpacity
+                        style={styles.buttonStyle}
+                        onPress={this._signOutAsync}
+                    >
+                        <Text style={{fontSize: 14, fontWeight: '600', color: '#333'}}>Sign Out</Text>
+                    </TouchableOpacity>
+
+                </View>
+
+                <View style={styles.adsHolder}>
+                    <AdMobBanner
+                        bannerSize="smartBannerPortrait"
+                        adUnitID="ca-app-pub-4762076392786064/7640436040"
+                        testDeviceID="EMULATOR"
+                        onDidFailToReceiveAdWithError={this.bannerError}
+                    />
+                </View>
+            </SafeAreaView>
+
         );
     }
 }
@@ -44,12 +58,18 @@ export default Inbox;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#333',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#000',
+    },
+    containerLoading:{
+        flex: 1,
+        backgroundColor: '#000',
     },
     fontColor:{
         color:'#fff'
+    },
+    adsHolder:{
+        height: 50,
+        justifyContent: 'center'
     },
     buttonStyle:{
         backgroundColor: '#f3ce21',
@@ -60,8 +80,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
-    adsHolder:{
-        position: 'absolute',
-        bottom: 0
-    }
 });

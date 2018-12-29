@@ -23,10 +23,9 @@ class SingleChart extends React.Component{
     }
 
     updatedata = () =>{
-        console.log("-----update-----")
-        console.log(this.props.data)
+
         imagesSource = this.props.data;
-        console.log(imagesSource)
+
 
     }
 
