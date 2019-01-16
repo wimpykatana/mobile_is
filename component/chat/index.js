@@ -5,7 +5,7 @@ import { GiftedChat } from 'react-native-gifted-chat'; // 0.3.0
 import Fire from '../../fire';
 
 type Props = {
-    name?: string,
+    name: string,
 };
 
 class Chat extends React.Component<Props> {
@@ -30,7 +30,7 @@ class Chat extends React.Component<Props> {
             <GiftedChat
                 messages={this.state.messages}
                 onSend={Fire.shared.send}
-                user={this.user}
+                user={this.name}
             />
         );
     }
