@@ -1,3 +1,3 @@
-##This is InvestsGram app
+##This is InvesGram app
 
 enjoy...
