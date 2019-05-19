@@ -69,7 +69,7 @@ class Inbox extends Component {
     }
 
     reqChart = () =>{
-        fetch('http://investorsukses.com:3000/chart',{
+        fetch('http://13.250.138.145:1331/chart',{
             method: 'post',
             headers: {
                 'Accept': 'application/json',

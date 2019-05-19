@@ -23,7 +23,7 @@ class Register extends Component {
         const { userPassword }  = this.state;
 
 
-        fetch("http://investorsukses.com:3000/register",{
+        fetch("http://13.250.138.145:1331/register",{
             method: 'POST',
             headers: {
                 Accept: 'application/json',

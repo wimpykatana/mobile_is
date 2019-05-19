@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "primaryColor": "#f3ce21",
     "icon": "./assets/icon.png",
@@ -29,7 +29,8 @@
     },
     "android": {
       "package": "com.investorsukses.mobile",
-      "permissions": []
+      "permissions": [],
+      "versionCode": 2
     }
   }
 }
