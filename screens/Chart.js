@@ -22,17 +22,23 @@ let typeChartBiasa = [{
 
 
 let ticker = [{
+    value: 'M5',
+    label: '5 minutes'
+},{
     value: 'M15',
     label: '15 minutes'
-}, {
+},{
     value: 'H1',
     label: '1 hour'
-}, {
+},{
     value: 'D1',
     label: 'Daily'
-}, {
+},{
     value: 'W1',
     label: 'Weekly'
+},{
+    value: 'M1',
+    label: 'Monthly'
 }];
 
 class Inbox extends Component {

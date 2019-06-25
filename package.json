@@ -3,14 +3,17 @@
   "private": true,
   "dependencies": {
     "eslint-plugin-react-native": "^3.3.0",
-    "expo": "^28.0.1",
+    "expo": "^31.0.0",
     "firebase": "^5.5.7",
-    "react": "16.3.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-28.0.0.tar.gz",
+    "react": "^16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-gifted-chat": "^0.4.3",
     "react-native-image-view": "^2.0.12",
     "react-native-material-dropdown": "^0.11.1",
     "react-navigation": "^2.17.0",
     "ws": "^6.1.0"
+  },
+  "devDependencies": {
+    "schedule": "^0.4.0"
   }
 }
