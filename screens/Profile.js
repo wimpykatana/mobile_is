@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image,Button,StatusBar,AsyncStorage, TouchableOpacity,SafeAreaView } from 'react-native';
-import { AdMobBanner } from 'expo';
+// import { AdMobBanner } from 'expo';
+import { AdMobBanner } from 'expo-ads-admob'
 import Userheader from '../component/userheader';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 

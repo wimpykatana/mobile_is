@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, SafeAreaView, ActivityIndicator,ScrollView,AsyncStorage,StatusBar,FlatList } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
-import { AdMobBanner } from 'expo';
+// import { AdMobBanner } from 'expo';
+import { AdMobBanner } from 'expo-ads-admob'
 import Chart from './Chart';
 import Profile from './Profile';
 import Userheader from '../component/userheader';

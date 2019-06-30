@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, StatusBar, TextInput,AsyncStorage, Image } from 'react-native';
 import Userheader from '../component/userheader';
-import { AdMobBanner } from 'expo';
+// import { AdMobBanner } from 'expo';
+import { AdMobBanner } from 'expo-ads-admob'
 import { Dropdown } from 'react-native-material-dropdown';
 import SingleChart from '../component/singlechart';
 

@@ -2,14 +2,14 @@
   "expo": {
     "name": "investorsukses",
     "description": "investor sukses app",
-    "slug": "investorsukses",
+    "slug": "investorsukses-app",
     "privacy": "public",
-    "sdkVersion": "31.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "primaryColor": "#f3ce21",
     "icon": "./assets/icon.png",
@@ -30,7 +30,7 @@
     "android": {
       "package": "com.investorsukses.mobile",
       "permissions": [],
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }
