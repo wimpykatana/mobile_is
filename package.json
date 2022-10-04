@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "eslint-plugin-react-native": "^3.3.0",
-    "expo": "^33.0.0",
+    "expo": "^46.0.14",
     "expo-ads-admob": "^5.0.1",
     "firebase": "^5.5.7",
     "react": "^16.8.3",
